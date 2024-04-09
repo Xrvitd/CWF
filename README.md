@@ -2,7 +2,9 @@
 
 Code of CWF: Consolidating Weak Features in High-quality Mesh Simplification.
 
-We will publish the code on GitHub after the submission.
+Please cite our work:
+```
+```
 
 Currently we have only tested our code on 64-bit windows systems and Visual Studio 2022 Professional.
 
