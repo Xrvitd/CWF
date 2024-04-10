@@ -45,14 +45,6 @@ note: check the location of dependencies and install. It is recommended to use v
 
 Configure->Generate->Open Project
 
-For both Debug and Release, make sure you open these options (should be opened by CMAKE):
-
-Right Click the "CVTLike" solution -> Properties -> Configuration Properties -> C/C++ ->  Language -> Open MP Support : Yes
-
-Right Click the "CVTLike" solution -> Properties -> Configuration Properties -> C/C++ ->  Preprocessor -> Preprocessor definition -> add "NOMINMAX"
-
-
-
 Then, build the project:
 
 ALL_BUILD -> Build
