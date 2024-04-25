@@ -4,6 +4,14 @@ Code of CWF: Consolidating Weak Features in High-quality Mesh Simplification.
 
 Please cite our work:
 ```
+@misc{xu2024cwf,
+      title={CWF: Consolidating Weak Features in High-quality Mesh Simplification}, 
+      author={Rui Xu and Longdu Liu and Ningna Wang and Shuangmin Chen and Shiqing Xin and Xiaohu Guo and Zichun Zhong and Taku Komura and Wenping Wang and Changhe Tu},
+      year={2024},
+      eprint={2404.15661},
+      archivePrefix={arXiv},
+      primaryClass={cs.GR}
+}
 ```
 
 Currently we have only tested our code on 64-bit windows systems and Visual Studio 2022 Professional.
