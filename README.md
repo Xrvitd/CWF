@@ -1,8 +1,11 @@
 # CWF: Consolidating Weak Features in High-quality Mesh Simplification
 
 Code of CWF: Consolidating Weak Features in High-quality Mesh Simplification.
+
 Project Page: https://ruixu.me/html/CWF/index.html 
+
 Paper link: https://arxiv.org/abs/2404.15661
+
 
 Please cite our work:
 ```
