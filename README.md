@@ -13,7 +13,7 @@ Please cite our work:
       title={CWF: Consolidating Weak Features in High-quality Mesh Simplification}, 
       author={Xu, Rui and Liu, Longdu and Wang, Ningna and Chen, Shuangmin and Xin, Shiqing and Guo, Xiaohu and Zhong, Zichun and Komura, Taku and Wang, Wenping and Tu, Changhe},
       journal={ACM Transactions on Graphics (TOG)},
-      publisher={ACM New York, NY, USA}
+      publisher={ACM New York, NY, USA},
       year={2024},
       address = {New York, NY, USA},
       volume = {43},
