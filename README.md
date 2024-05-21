@@ -9,13 +9,17 @@ Paper link: https://arxiv.org/abs/2404.15661
 
 Please cite our work:
 ```
-@misc{xu2024cwf,
+@article{xu2024cwf,
       title={CWF: Consolidating Weak Features in High-quality Mesh Simplification}, 
-      author={Rui Xu and Longdu Liu and Ningna Wang and Shuangmin Chen and Shiqing Xin and Xiaohu Guo and Zichun Zhong and Taku Komura and Wenping Wang and Changhe Tu},
+      author={Xu, Rui and Liu, Longdu and Wang, Ningna and Chen, Shuangmin and Xin, Shiqing and Guo, Xiaohu and Zhong, Zichun and Komura, Taku and Wang, Wenping and Tu, Changhe},
       year={2024},
-      eprint={2404.15661},
-      archivePrefix={arXiv},
-      primaryClass={cs.GR}
+      publisher = {Association for Computing Machinery},
+      address = {New York, NY, USA},
+      volume = {43},
+      number = {4},
+      issn = {0730-0301},
+      url = {https://doi.org/10.1145/3658159},
+      doi = {10.1145/3658159},
 }
 ```
 
