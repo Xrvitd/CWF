@@ -101,3 +101,7 @@ Considering that most computers may not have this configuration, this commit doe
 In order to allow you to view the optimization process in more detail,
 we have only set the optimization stop at 50 iterations, you can manually stop the optimization, and view all iteration results in the data\LBFGSOUT folder.
 
+
+## License
+CWF is under [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.en.html), so any downstream solution and products (including cloud services) that include CWF code inside it should be open-sourced to comply with the AGPL conditions. For learning purposes only or not for commercial use. If you want to use it for commercial purposes, please contact us first.
+
