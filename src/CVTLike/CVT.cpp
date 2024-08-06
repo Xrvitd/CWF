@@ -148,19 +148,19 @@ namespace BGAL
 	{
 		
 	}
-	void OutputMesh(std::vector<_Point3>& sites, _Restricted_Tessellation3D RVD, int num, string modelname, int step)
+	void OutputMesh(std::vector<_Point3>& sites, _Restricted_Tessellation3D RVD, int num, std::string modelname, int step)
 	{
-		string outpath = "../../data/LBFGSOUT/";
+		std::string outpath = "../../data/LBFGSOUT/";
 		const std::vector<std::vector<std::tuple<int, int, int>>>& cells = RVD.get_cells_();
-		string filepath = outpath + "Ours_" + to_string(num) + "_" + modelname + "_RVD.obj";
+		std::string filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_RVD.obj";
 		if (step == 2)
 		{
-			filepath = outpath + "Ours_" + to_string(num) + "_" + modelname + "_RVD.obj";
+			filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_RVD.obj";
 		}
 
 		if (step > 2)
 		{
-			filepath = outpath + "Ours_" + to_string(num) + "_" + modelname + "_Iter" + to_string(step - 3) + "_RVD.obj";
+			filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_Iter" + std::to_string(step - 3) + "_RVD.obj";
 		}
 		std::ofstream out(filepath);
 		out << "g 3D_Object\nmtllib BKLineColorBar.mtl\nusemtl BKLineColorBar" << std::endl;
@@ -208,15 +208,15 @@ namespace BGAL
 		out.close();
 
 
-		filepath = outpath + "Ours_" + to_string(num) + "_" + modelname + "_Points.xyz";
+		filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_Points.xyz";
 		if (step == 2)
 		{
-			filepath = outpath + "Ours_" + to_string(num) + "_" + modelname + "_Points.xyz";
+			filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_Points.xyz";
 		}
 
 		if (step > 2)
 		{
-			filepath = outpath + "Ours_" + to_string(num) + "_" + modelname + "_Iter" + to_string(step - 3) + "_Points.xyz";
+			filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_Iter" + std::to_string(step - 3) + "_Points.xyz";
 		}
 
 		std::ofstream outP(filepath);
@@ -234,26 +234,26 @@ namespace BGAL
 
 		if (step >= 2)
 		{
-			string filepath = outpath + "\\Ours_" + to_string(num) + "_" + modelname + "_Remesh.obj";
+			std::string filepath = outpath + "\\Ours_" + std::to_string(num) + "_" + modelname + "_Remesh.obj";
 
 
-			string	filepath1 = outpath + "Ours_" + to_string(num) + "_" + modelname + "Iter" + to_string(step - 3) + "_Remesh.obj";
+			std::string	filepath1 = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "Iter" + std::to_string(step - 3) + "_Remesh.obj";
 			std::ofstream outRDT(filepath);
 			std::ofstream outRDT1(filepath1);
 
 			auto Vs = sites;
 			auto Edges = RVD.get_edges_();
-			set<pair<int, int>> RDT_Edges;
-			vector<set<int>> neibors;
+			std::set<std::pair<int, int>> RDT_Edges;
+			std::vector<std::set<int>> neibors;
 			neibors.resize(Vs.size());
 			for (int i = 0; i < Edges.size(); i++)
 			{
 				for (auto ee : Edges[i])
 				{
-					RDT_Edges.insert(make_pair(min(i, ee.first), max(i, ee.first)));
+					RDT_Edges.insert(std::make_pair(std::min(i, ee.first), std::max(i, ee.first)));
 					neibors[i].insert(ee.first);
 					neibors[ee.first].insert(i);
-					//cout << ee.first << endl;
+					//std::cout << ee.first << std::endl;
 
 				}
 			}
@@ -261,36 +261,36 @@ namespace BGAL
 			for (auto v : Vs)
 			{
 				if (step >= 2)
-					outRDT << "v " << v << endl;
-				outRDT1 << "v " << v << endl;
+					outRDT << "v " << v << std::endl;
+				outRDT1 << "v " << v << std::endl;
 			}
 
-			set<MyFace> rdtFaces;
+			std::set<MyFace> rdtFaces;
 
 			for (auto e : RDT_Edges)
 			{
 				for (int pid : neibors[e.first])
 				{
-					if (RDT_Edges.find(make_pair(min(pid, e.first), max(pid, e.first))) != RDT_Edges.end())
+					if (RDT_Edges.find(std::make_pair(std::min(pid, e.first), std::max(pid, e.first))) != RDT_Edges.end())
 					{
-						if (RDT_Edges.find(make_pair(min(pid, e.second), max(pid, e.second))) != RDT_Edges.end())
+						if (RDT_Edges.find(std::make_pair(std::min(pid, e.second), std::max(pid, e.second))) != RDT_Edges.end())
 						{
 							int f1 = pid, f2 = e.first, f3 = e.second;
 
 							int mid;
-							if (f1 != max(f1, max(f2, f3)) && f1 != min(f1, min(f2, f3)))
+							if (f1 != std::max(f1, std::max(f2, f3)) && f1 != std::min(f1, min(f2, f3)))
 							{
 								mid = f1;
 							}
-							if (f2 != max(f1, max(f2, f3)) && f2 != min(f1, min(f2, f3)))
+							if (f2 != std::max(f1, std::max(f2, f3)) && f2 != std::min(f1, std::min(f2, f3)))
 							{
 								mid = f2;
 							}
-							if (f3 != max(f1, max(f2, f3)) && f3 != min(f1, min(f2, f3)))
+							if (f3 != std::max(f1, max(f2, f3)) && f3 != std::min(f1, min(f2, f3)))
 							{
 								mid = f3;
 							}
-							rdtFaces.insert(MyFace(max(f1, max(f2, f3)), mid, min(f1, min(f2, f3))));
+							rdtFaces.insert(MyFace(std::max(f1, std::max(f2, f3)), mid, std::min(f1, std::min(f2, f3))));
 						}
 					}
 				}
@@ -298,8 +298,8 @@ namespace BGAL
 			for (auto f : rdtFaces)
 			{
 				if (step >= 2)
-					outRDT << "f " << f.p.x() + 1 << " " << f.p.y() + 1 << " " << f.p.z() + 1 << endl;
-				outRDT1 << "f " << f.p.x() + 1 << " " << f.p.y() + 1 << " " << f.p.z() + 1 << endl;
+					outRDT << "f " << f.p.x() + 1 << " " << f.p.y() + 1 << " " << f.p.z() + 1 << std::endl;
+				outRDT1 << "f " << f.p.x() + 1 << " " << f.p.y() + 1 << " " << f.p.z() + 1 << std::endl;
 			}
 
 			outRDT.close();
@@ -319,9 +319,9 @@ namespace BGAL
 		clock_t start, end;
 		clock_t startRVD, endRVD;
 
-		string filepath = "../../data/";
+		std::string filepath = "../../data/";
 		double PI = 3.14159265358;
-		string modelname = modelNamee;
+		std::string modelname = modelNamee;
 		Polyhedron polyhedron;
 		std::ifstream input("Temp.off");
 		input >> polyhedron;
@@ -369,9 +369,9 @@ namespace BGAL
 	
 
 		double Movement = 0.01;
-		ifstream inPoints("..\\..\\data\\n" + to_string(num_sites)+"_" + modelname + "_inputPoints.xyz");
+		std::ifstream inPoints("..\\..\\data\\n" + std::to_string(num_sites)+"_" + modelname + "_inputPoints.xyz");
 		
-		vector<Eigen::Vector3d> Pts,Nors;
+		std::vector<Eigen::Vector3d> Pts,Nors;
 		char cccc;
 		double x, y, z, nx, ny, nz; // if xyz file has normal
 		while (inPoints >>x >> y >> z >>nx>>ny>>nz)
@@ -380,14 +380,14 @@ namespace BGAL
 			Nors.push_back(Eigen::Vector3d(nx,ny,nz)); // Nors here is useless, if do not have normal, just set it to (1,0,0)
 		}
 		inPoints.close();
-		cout<<"Pts.size(): "<<Pts.size()<<endl;
+		std::cout<<"Pts.size(): "<<Pts.size()<< std::endl;
 
 
 		// begin step 1.
 		int num = Pts.size();
 
-		vector<Eigen::Vector3d> Pts3;
-		cout<< "\nBegin CWF.\n" << endl;
+		std::vector<Eigen::Vector3d> Pts3;
+		std::cout<< "\nBegin CWF.\n" << std::endl;
 
 
 		int Fnum = 4;
@@ -434,7 +434,7 @@ namespace BGAL
 				const std::vector<std::map<int, std::vector<std::pair<int, int>>>>& edges = _RVD.get_edges_();
 				double energy = 0.0;
 				g.setZero();
-				vector<Eigen::Vector3d> gi;
+				std::vector<Eigen::Vector3d> gi;
 				gi.resize(num);
 				for (int i = 0; i < num; ++i)
 				{
@@ -507,17 +507,17 @@ namespace BGAL
 				}
 				energy += loss;
 				
-				cout << setprecision(7) << "energy: " << energy << " LossCVT: " << lossCVT/eplison << " LossQE: " << loss - lossCVT << " Lambda_CVT: " << eplison << endl;
+				std::cout << std::setprecision(7) << "energy: " << energy << " LossCVT: " << lossCVT/eplison << " LossQE: " << loss - lossCVT << " Lambda_CVT: " << eplison << std::endl;
 
 				return energy;
 			};
 
 
-		vector<Eigen::Vector3d> Pts2;
+			std::vector<Eigen::Vector3d> Pts2;
 
 		Pts2 = Pts;
 		num = Pts2.size();
-		cout << Pts2.size()<<"  "<<num << endl;
+		std::cout << Pts2.size()<<"  "<<num << std::endl;
 		_sites.resize(num);
 		_para.max_linearsearch = 20;
 		_para.max_iteration = 50;
@@ -535,7 +535,7 @@ namespace BGAL
 		lbfgs2.minimize(fgm2, iterX2);
 		end = clock();
 		allTime += (double)(end - start) / CLOCKS_PER_SEC;
-		cout<<"allTime: "<<allTime<<" RVDtime: "<<RVDtime<< " L-BFGS time: "<< allTime - RVDtime << endl;
+		std::cout<<"allTime: "<<allTime<<" RVDtime: "<<RVDtime<< " L-BFGS time: "<< allTime - RVDtime << std::endl;
 		for (int i = 0; i < num; ++i)
 		{
 			//Point_T query(x0[i * 3], x0[i * 3+1], x0[i * 3+2]);

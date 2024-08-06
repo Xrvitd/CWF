@@ -30,12 +30,12 @@ void CWF3DTest()
 
 
 	int Nums = 600;
-	string file = "mobius1";
-	cout << "Now file: " << file << endl;
+	std::string file = "mobius1";
+	std::cout << "Now file: " << file << std::endl;
 	
-	cout << Nums << "   " << file << "   \n";
-	string filepath = "../../data/";
-	string modelname = file;
+	std::cout << Nums << "   " << file << "   \n";
+	std::string filepath = "../../data/";
+	std::string modelname = file;
 
 	// .obj to .off
 	Eigen::MatrixXd V;
