@@ -283,9 +283,9 @@ int i4_modp(int i, int j)
 
   if (j == 0)
   {
-    cerr << "\n";
-    cerr << "I4_MODP - Fatal error!\n";
-    cerr << "  I4_MODP ( I, J ) called with J = " << j << "\n";
+      std::cerr << "\n";
+      std::cerr << "I4_MODP - Fatal error!\n";
+      std::cerr << "  I4_MODP ( I, J ) called with J = " << j << "\n";
     exit(1);
   }
 
@@ -456,9 +456,9 @@ int keast_degree(int rule)
   else
   {
     degree = -1;
-    cerr << "\n";
-    cerr << "KEAST_DEGREE - Fatal error!\n";
-    cerr << "  Illegal RULE = " << rule << "\n";
+    std::cerr << "\n";
+    std::cerr << "KEAST_DEGREE - Fatal error!\n";
+    std::cerr << "  Illegal RULE = " << rule << "\n";
     exit(1);
   }
 
@@ -715,9 +715,9 @@ void keast_rule(int rule, int order_num, double xyz[], double w[])
     }
     else
     {
-      cerr << "\n";
-      cerr << "KEAST_RULE - Fatal error!\n;";
-      cerr << "  Illegal SUBORDER(" << s << ") = " << suborder[s] << "\n";
+        std::cerr << "\n";
+        std::cerr << "KEAST_RULE - Fatal error!\n;";
+        std::cerr << "  Illegal SUBORDER(" << s << ") = " << suborder[s] << "\n";
       exit(1);
     }
   }
@@ -875,9 +875,9 @@ int *keast_suborder(int rule, int suborder_num)
   }
   else
   {
-    cerr << "\n";
-    cerr << "KEAST_SUBORDER - Fatal error!\n";
-    cerr << "  Illegal RULE = " << rule << "\n";
+      std::cerr << "\n";
+      std::cerr << "KEAST_SUBORDER - Fatal error!\n";
+      std::cerr << "  Illegal RULE = " << rule << "\n";
     exit(1);
   }
 
@@ -964,9 +964,9 @@ int keast_suborder_num(int rule)
   else
   {
     suborder_num = -1;
-    cerr << "\n";
-    cerr << "KEAST_SUBORDER_NUM - Fatal error!\n";
-    cerr << "  Illegal RULE = " << rule << "\n";
+    std::cerr << "\n";
+    std::cerr << "KEAST_SUBORDER_NUM - Fatal error!\n";
+    std::cerr << "  Illegal RULE = " << rule << "\n";
     exit(1);
   }
 
@@ -1058,9 +1058,9 @@ void keast_subrule(int rule, int suborder_num, double suborder_xyzz[],
   }
   else
   {
-    cerr << "\n";
-    cerr << "KEAST_SUBRULE - Fatal error!\n";
-    cerr << "  Illegal RULE = " << rule << "\n";
+      std::cerr << "\n";
+      std::cerr << "KEAST_SUBRULE - Fatal error!\n";
+      std::cerr << "  Illegal RULE = " << rule << "\n";
     exit(1);
   }
   //
@@ -2172,69 +2172,69 @@ double tetrahedron_volume(double tetra[3 * 4])
 
 //double Tetra_Integration_API(const Geex::vec3 &X0, const Geex::vec3 &C1, const Geex::vec3 &C2, const Geex::vec3 &C3, int rule, std::vector<Geex::vec4> & Points)
 //{
-//	double node_xyz[3 * 4] = {
-//		0.0, 0.0, 0.0,
-//		1.0, 0.0, 0.0,
-//		0.0, 1.0, 0.0,
-//		0.0, 0.0, 1.0 };
-//	double node_xyz2[12];
-//	node_xyz2[0] = X0.x;
-//	node_xyz2[1] = X0.y;
-//	node_xyz2[2] = X0.z;
-//	node_xyz2[3] = C1.x;
-//	node_xyz2[4] = C1.y;
-//	node_xyz2[5] = C1.z;
-//	node_xyz2[6] = C2.x;
-//	node_xyz2[7] = C2.y;
-//	node_xyz2[8] = C2.z;
-//	node_xyz2[9] = C3.x;
-//	node_xyz2[10] = C3.y;
-//	node_xyz2[11] = C3.z;
+//      double node_xyz[3 * 4] = {
+//              0.0, 0.0, 0.0,
+//              1.0, 0.0, 0.0,
+//              0.0, 1.0, 0.0,
+//              0.0, 0.0, 1.0 };
+//      double node_xyz2[12];
+//      node_xyz2[0] = X0.x;
+//      node_xyz2[1] = X0.y;
+//      node_xyz2[2] = X0.z;
+//      node_xyz2[3] = C1.x;
+//      node_xyz2[4] = C1.y;
+//      node_xyz2[5] = C1.z;
+//      node_xyz2[6] = C2.x;
+//      node_xyz2[7] = C2.y;
+//      node_xyz2[8] = C2.z;
+//      node_xyz2[9] = C3.x;
+//      node_xyz2[10] = C3.y;
+//      node_xyz2[11] = C3.z;
 //
 //
-//	double *w;
-//	double *xyz;
-//	double *xyz2;
+//      double *w;
+//      double *xyz;
+//      double *xyz2;
 //
-//	int order_num = keast_order_num(rule);
-//	xyz = new double[3 * order_num];
-//	xyz2 = new double[3 * order_num];
-//	w = new double[order_num];
+//      int order_num = keast_order_num(rule);
+//      xyz = new double[3 * order_num];
+//      xyz2 = new double[3 * order_num];
+//      w = new double[order_num];
 //
-//	keast_rule(rule, order_num, xyz, w);
+//      keast_rule(rule, order_num, xyz, w);
 //
-//	tetrahedron_reference_to_physical(node_xyz2, order_num, xyz, xyz2);
+//      tetrahedron_reference_to_physical(node_xyz2, order_num, xyz, xyz2);
 //
-//	double volume = tetrahedron_volume(node_xyz2);//��������������
+//      double volume = tetrahedron_volume(node_xyz2);//��������������
 //
-//	for (int order = 0; order < order_num; order++)
-//	{
-//		Points.push_back(Geex::vec4(xyz2[0 + order * 3], xyz2[1 + order * 3], xyz2[2 + order * 3], w[order]));
-//	}
-//	delete[] w;
-//	delete[] xyz;
-//	delete[] xyz2;
+//      for (int order = 0; order < order_num; order++)
+//      {
+//              Points.push_back(Geex::vec4(xyz2[0 + order * 3], xyz2[1 + order * 3], xyz2[2 + order * 3], w[order]));
+//      }
+//      delete[] w;
+//      delete[] xyz;
+//      delete[] xyz2;
 //
-//	return volume;
+//      return volume;
 //}
 //
 //double Tri_Integration_API(const Geex::vec3 &C1, const Geex::vec3 &C2, const Geex::vec3 &C3, std::vector<Geex::vec4> & Points)
 //{
-//	Geex::vec3  u = C3 - C1;
-//	Geex::vec3  v = C2 - C1;
+//      Geex::vec3  u = C3 - C1;
+//      Geex::vec3  v = C2 - C1;
 //
-//	Geex::vec3 p1 = C1 + u / 2 + v / 2;
-//	Points.push_back(Geex::vec4(p1.x, p1.y, p1.z, 1.0 / 30));
-//	Geex::vec3 p2 = C1 + u / 2;
-//	Points.push_back(Geex::vec4(p2.x, p2.y, p2.z, 1.0 / 30));
-//	Geex::vec3 p3 = C1 + v / 2;
-//	Points.push_back(Geex::vec4(p3.x, p3.y, p3.z, 1.0 / 30));
-//	Geex::vec3 p4 = C1 + u / 6 + 2 * v / 3;
-//	Points.push_back(Geex::vec4(p4.x, p4.y, p4.z, 3.0 / 10));
-//	Geex::vec3 p5 = C1 + v / 6 + 2 * u / 3;
-//	Points.push_back(Geex::vec4(p5.x, p5.y, p5.z, 3.0 / 10));
-//	Geex::vec3 p6 = C1 + v / 6 + u / 6;
-//	Points.push_back(Geex::vec4(p6.x, p6.y, p6.z, 3.0 / 10));
-//	double area = (cross(u, v).length()) / 2;
-//	return area;
+//      Geex::vec3 p1 = C1 + u / 2 + v / 2;
+//      Points.push_back(Geex::vec4(p1.x, p1.y, p1.z, 1.0 / 30));
+//      Geex::vec3 p2 = C1 + u / 2;
+//      Points.push_back(Geex::vec4(p2.x, p2.y, p2.z, 1.0 / 30));
+//      Geex::vec3 p3 = C1 + v / 2;
+//      Points.push_back(Geex::vec4(p3.x, p3.y, p3.z, 1.0 / 30));
+//      Geex::vec3 p4 = C1 + u / 6 + 2 * v / 3;
+//      Points.push_back(Geex::vec4(p4.x, p4.y, p4.z, 3.0 / 10));
+//      Geex::vec3 p5 = C1 + v / 6 + 2 * u / 3;
+//      Points.push_back(Geex::vec4(p5.x, p5.y, p5.z, 3.0 / 10));
+//      Geex::vec3 p6 = C1 + v / 6 + u / 6;
+//      Points.push_back(Geex::vec4(p6.x, p6.y, p6.z, 3.0 / 10));
+//      double area = (cross(u, v).length()) / 2;
+//      return area;
 //}

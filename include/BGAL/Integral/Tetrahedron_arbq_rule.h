@@ -8,7 +8,7 @@
 # include <time.h>
 # include <cstring>
 # include <vector>
-using namespace std;
+// using namespace std;
 
 //****************************************************************************80
 
@@ -25,27 +25,27 @@ int keast_rule_num(void);
 int* keast_suborder(int rule, int suborder_num);
 
 void keast_subrule(int rule, int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_01(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_02(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_03(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_04(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_05(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_06(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_07(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_08(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_09(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 void keast_subrule_10(int suborder_num, double suborder_xyzz[],
-	double suborder_w[]);
+        double suborder_w[]);
 double* monomial_value(int dim_num, int point_num, double x[], int expon[]);
 double r8_huge(void);
 int r8_nint(double x);
@@ -53,7 +53,5 @@ double r8mat_det_4d(double a[]);
 double r8vec_dot(int n, double a1[], double a2[]);
 int s_len_trim(char* s);
 void tetrahedron_reference_to_physical(double t[], int n, double ref[],
-	double phy[]);
+        double phy[]);
 double tetrahedron_volume(double t[3 * 4]);
-
-

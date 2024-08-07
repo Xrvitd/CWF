@@ -53,7 +53,7 @@ namespace BGAL
 		{
 			const std::vector<std::vector<std::tuple<int, int, int>>>& cells = _RPD.get_cells_();
 			const std::vector<std::map<int, std::vector<std::pair<int, int>>>>& edges = _RPD.get_edges_();
-			vector<Eigen::Triplet<double>> trilist;
+			std::vector<Eigen::Triplet<double>> trilist;
 			for (int i = 0; i < num; ++i)
 			{
 				double hii = 0;
