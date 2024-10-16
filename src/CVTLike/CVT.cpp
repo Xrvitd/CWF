@@ -531,7 +531,6 @@ namespace BGAL
 		std::cout << Pts2.size()<<"  "<<num << std::endl;
 		_sites.resize(num);
 		_para.max_linearsearch = 20;
-		_para.max_iteration = 50;
 		BGAL::_LBFGS lbfgs2(_para);
 		Eigen::VectorXd iterX2(num * 3);
 		for (int i = 0; i < num; ++i)

@@ -8,7 +8,7 @@
 #include <BGAL/CVTLike/CVT.h>
 
 
-void CWF3D(std::string file, std::string pointsFile)
+void CWF3D(std::string file, std::string pointsFile, int max_iteration)
 {
 	std::string filepath = "../../data/";
 	std::string modelname = file;
@@ -31,6 +31,7 @@ void CWF3D(std::string file, std::string pointsFile)
 	BGAL::_LBFGS::_Parameter para;
 	para.is_show = true;
 	para.epsilon = 1e-30;
+	para.max_iteration = max_iteration;
 	BGAL::_CVT3D cvt(model, rho, para);
 	int num = 0;
 
@@ -42,7 +43,9 @@ void CWF3D(std::string file, std::string pointsFile)
 
 int main(int argc, char* argv[])
 {
-	CWF3D(argv[1], argv[2]);
+	std::cout << "argc = " << argc << std::endl;
+	int max_iteration = (argc>3)?std::stoi(argv[3]):50;
+	CWF3D(argv[1], argv[2], max_iteration);
 
 	return 0;
 }

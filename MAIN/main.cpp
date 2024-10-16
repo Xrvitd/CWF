@@ -55,6 +55,7 @@ void CWF3DTest()
 	BGAL::_LBFGS::_Parameter para;
 	para.is_show = true;
 	para.epsilon = 1e-30;
+	para.max_iteration = 50;
 	BGAL::_CVT3D cvt(model, rho, para);
 	int num = Nums;
 	cvt.calculate_(num, (char*)modelname.c_str());
