@@ -1,24 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <functional>
-#include <io.h>
-#include <random>
-#include <omp.h>
-#include <filesystem>
 
 #include <igl/readOBJ.h>
 #include <igl/writeOBJ.h>
 #include <igl/writeOFF.h>
-#include <BGAL/Optimization/LinearSystem/LinearSystem.h>
-#include <BGAL/Optimization/ALGLIB/optimization.h>
-#include <BGAL/Optimization/LBFGS/LBFGS.h>
-#include <BGAL/Integral/Integral.h>
-#include <BGAL/Model/ManifoldModel.h>
-#include <BGAL/Model/Model_Iterator.h>
 
-#include <BGAL/Tessellation3D/Tessellation3D.h>
-
-#include <BGAL/CVTLike/CPD.h>
 #include <BGAL/CVTLike/CVT.h>
 
 
