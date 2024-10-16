@@ -25,7 +25,6 @@ include_directories( ${LIBIGL_INCLUDE})
 find_package(Eigen3 REQUIRED)
 if (Eigen3_FOUND)
     message(STATUS "${EIGEN3_VERSION_STRING} FOUND")
-    # include_directories(${EIGEN3_INCLUDE_DIR})
 endif ()
 
 # Get Boost
