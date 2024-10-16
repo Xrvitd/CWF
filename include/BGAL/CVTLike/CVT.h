@@ -14,14 +14,23 @@
 #include "BGAL/Tessellation3D/Tessellation3D.h"
 #include "BGAL/Optimization/LBFGS/LBFGS.h"
 
+#include <string>
+
 namespace BGAL
 {
 	class _CVT3D
 	{
+		std::string outpath = "../../data/LBFGSOUT/";
 	public:
 		_CVT3D(const _ManifoldModel& model);
 		_CVT3D(const _ManifoldModel& model, std::function<double(_Point3& p)>& rho, _LBFGS::_Parameter para);
-		void calculate_(int site_num, char* modelNamee);
+		void calculate_(int site_num, char* modelNamee, char* pointsName = nullptr);
+
+		void set_outpath(const std::string& path)
+		{
+			outpath = path;
+		}
+
 		const std::vector<_Point3>& get_sites() const
 		{
 			return _sites;

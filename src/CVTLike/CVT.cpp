@@ -146,11 +146,10 @@ namespace BGAL
 	}
 	_CVT3D::_CVT3D(const _ManifoldModel& model, std::function<double(_Point3& p)>& rho, _LBFGS::_Parameter para) : _model(model), _RVD(model), _RVD2(model), _rho(rho), _para(para)
 	{
-		
+
 	}
-	void OutputMesh(std::vector<_Point3>& sites, _Restricted_Tessellation3D RVD, int num, std::string modelname, int step)
+	void OutputMesh(std::vector<_Point3>& sites, _Restricted_Tessellation3D RVD, int num, std::string outpath, std::string modelname, int step)
 	{
-		std::string outpath = "../../data/LBFGSOUT/";
 		const std::vector<std::vector<std::tuple<int, int, int>>>& cells = RVD.get_cells_();
 		std::string filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_RVD.obj";
 		if (step == 2)
@@ -162,6 +161,7 @@ namespace BGAL
 		{
 			filepath = outpath + "Ours_" + std::to_string(num) + "_" + modelname + "_Iter" + std::to_string(step - 3) + "_RVD.obj";
 		}
+		std::cout << "filepath = " << filepath << std::endl;
 		std::ofstream out(filepath);
 		out << "g 3D_Object\nmtllib BKLineColorBar.mtl\nusemtl BKLineColorBar" << std::endl;
 		for (int i = 0; i < RVD.number_vertices_(); ++i)
@@ -304,7 +304,7 @@ namespace BGAL
 
 			outRDT.close();
 			outRDT1.close();
-			
+
 		}
 
 
@@ -312,8 +312,8 @@ namespace BGAL
 	}
 
 
-	void _CVT3D::calculate_(int num_sites, char* modelNamee)
-	{		
+	void _CVT3D::calculate_(int num_sites, char* modelNamee, char* pointsName)
+	{
 
 		double allTime = 0, RVDtime = 0;
 		clock_t start, end;
@@ -366,23 +366,33 @@ namespace BGAL
 			PV2(i) = sqrt((PV2(i) * PV2(i) ) / bata);
 		}
 		*/
-	
+
 
 		double Movement = 0.01;
-		std::ifstream inPoints("..\\..\\data\\n" + std::to_string(num_sites)+"_" + modelname + "_inputPoints.xyz");
-		
+		std::string inPointsName;
+		if(pointsName == nullptr){
+			inPointsName = std::string("..\\..\\data\\n") + std::to_string(num_sites)+"_" + modelname + "_inputPoints.xyz";
+		}else{
+			inPointsName = pointsName;
+		}
+		std::ifstream inPoints(inPointsName.c_str());
+
 		std::vector<Eigen::Vector3d> Pts,Nors;
-		char cccc;
+
+		int count = 0;
 		double x, y, z, nx, ny, nz; // if xyz file has normal
 		while (inPoints >>x >> y >> z >>nx>>ny>>nz)
 		{
 			Pts.push_back(Eigen::Vector3d(x, y, z));
 			Nors.push_back(Eigen::Vector3d(nx,ny,nz)); // Nors here is useless, if do not have normal, just set it to (1,0,0)
+			++count;
 		}
 		inPoints.close();
 		std::cout<<"Pts.size(): "<<Pts.size()<< std::endl;
 
-
+         if(pointsName != nullptr){
+			num_sites = count;
+		 }
 		// begin step 1.
 		int num = Pts.size();
 
@@ -399,7 +409,7 @@ namespace BGAL
 			{
 				eplison = eplison * decay;
 				double lossCVT = 0, lossQE = 0, loss = 0;
-				
+
 				startRVD = clock();
 				for (int i = 0; i < num; ++i)
 				{
@@ -424,7 +434,7 @@ namespace BGAL
 				Fnum++;
 				if (Fnum % 1 == 0)
 				{
-					OutputMesh(_sites, _RVD, num_sites, modelname, Fnum); //output process
+					OutputMesh(_sites, _RVD, num_sites, outpath, modelname, Fnum); //output process
 				}
 				endRVD = clock();
 				RVDtime += (double)(endRVD - startRVD) / CLOCKS_PER_SEC;
@@ -440,15 +450,15 @@ namespace BGAL
 				{
 					gi[i] = Eigen::Vector3d(0, 0, 0);
 				}
-				
+
 				omp_set_num_threads(30);  // change to your CPU core numbers
-#pragma omp parallel for 
+#pragma omp parallel for
 				for (int i = 0; i < num; ++i)
 				{
 
 					for (int j = 0; j < cells[i].size(); ++j)
 					{
-						
+
 
 						Eigen::VectorXd inte = BGAL::_Integral::integral_triangle3D(
 							[&](BGAL::_Point3 p)
@@ -457,12 +467,12 @@ namespace BGAL
 
 								BGAL::_Point3  NorTriM = (_RVD.vertex_(std::get<1>(cells[i][j])) - _RVD.vertex_(std::get<0>(cells[i][j]))).cross_(_RVD.vertex_(std::get<2>(cells[i][j])) - _RVD.vertex_(std::get<0>(cells[i][j])));
 								NorTriM.normalized_();
-								
-							
+
+
 								BGAL::_Point3 Nori(Nors[i].x(), Nors[i].y(), Nors[i].z());
-							
+
 								r(0) = (eplison * _rho(p) * ((_sites[i] - p).sqlength_())); //CVT
-								
+
 								r(1) = lambda*(NorTriM.dot_(p - _sites[i]))* (NorTriM.dot_(p - _sites[i])) + eplison* ((p - _sites[i]).sqlength_()); // qe+CVT
 
 								r(2) = lambda* -2 * NorTriM.x() * (NorTriM.dot_(p - _sites[i])) + eplison * -2 * (p - _sites[i]).x();  	 //g
@@ -471,7 +481,7 @@ namespace BGAL
 
 
 								return r;
-							
+
 							}, _RVD.vertex_(std::get<0>(cells[i][j])), _RVD.vertex_(std::get<1>(cells[i][j])), _RVD.vertex_(std::get<2>(cells[i][j]))
 								);
 						//energy += alpha * inte(1);
@@ -482,12 +492,12 @@ namespace BGAL
 						gi[i].z()+= alpha * inte(4);
 					}
 
-					
+
 					// if use exact gradient, then use this
-					
+
 					//for (auto e : edges[i])
 					//{
-					//	
+					//
 					//	auto p = (0.5 * (_sites[e.first] + _sites[i]));
 					//	auto nx = BGAL::_Point3((0.5 * (Nors[e.first] + Nors[i])).x(), (0.5 * (Nors[e.first] + Nors[i])).y(), (0.5 * (Nors[e.first] + Nors[i])).z());
 					//	auto addgi = (0.5 * (_sites[e.first] - _sites[i]) / (_sites[e.first] - _sites[i]).length_()) *(  pow((p - _sites[i]).dot_(nx),2) - pow((p - _sites[e.first]).dot_(nx), 2)) * (_sites[e.first] - _sites[i]).length_();
@@ -506,7 +516,7 @@ namespace BGAL
 					g(i * 3 + 2) += gi[i].z();
 				}
 				energy += loss;
-				
+
 				std::cout << std::setprecision(7) << "energy: " << energy << " LossCVT: " << lossCVT/eplison << " LossQE: " << loss - lossCVT << " Lambda_CVT: " << eplison << std::endl;
 
 				return energy;
@@ -559,7 +569,7 @@ namespace BGAL
 		}
 		_RVD.calculate_(_sites);
 
-		OutputMesh(_sites, _RVD, num_sites, modelname, 2);
+		OutputMesh(_sites, _RVD, num_sites, outpath, modelname, 2);
 
 
 	}
