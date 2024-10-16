@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.17)
-set(CMAKE_TOOLCHAIN_FILE C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake)
+# set(CMAKE_TOOLCHAIN_FILE C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake)
 project(BGAL)
 
 
 # Default Build_type RELEASE
 set(CMAKE_BUILD_TYPE RELEASE)
 # CXX STANDARD
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 # Set Version
 set(VERSION 1.0)
 # Set lib output directory
@@ -18,24 +18,26 @@ option(CMAKE_INSTALL_PREFIX "BGAL install PATH" /usr/local)
 # include header from project_source_dir
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+find_path( LIBIGL_INCLUDE "igl/ZERO.h")
+include_directories( ${LIBIGL_INCLUDE})
+
 # Get Eigen3
 find_package(Eigen3 REQUIRED)
 if (Eigen3_FOUND)
-    message(STATUS "${EIGEN3_VERSION_STRING}")
-    include_directories(${EIGEN3_INCLUDE_DIR})
+    message(STATUS "${EIGEN3_VERSION_STRING} FOUND")
 endif ()
 
 # Get Boost
 find_package(Boost REQUIRED)
 if (Boost_FOUND)
-    message(STATUS "BOOST FOUNDED")
+    message(STATUS "BOOST FOUND")
     include_directories(${Boost_INCLUDE_DIRS})
 endif ()
 
 # Get CGAL
 find_package(CGAL REQUIRED)
 if (CGAL_FOUND)
-    include(${CGAL_USE_FILE})
+    message(STATUS "CGAL FOUND")
 else ()
     message("ERROR: this program requires CGAL and will not be compiled.")
 endif ()
@@ -66,7 +68,7 @@ install(TARGETS Algorithm BaseShape Draw Geodesic Integral Model Optimization Po
 	ARCHIVE DESTINATION lib
 	RUNTIME DESTINATION bin
 	PUBLIC_HEADER DESTINATION include
-	)	
+	)
 install(DIRECTORY ./include/ DESTINATION include
         FILES_MATCHING PATTERN "*.h")
 configure_file(${PROJECT_NAME}-config.cmake.in ${PROJECT_NAME}-config.cmake @ONLY)

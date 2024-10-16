@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 
-set(BGAL_Optimization_SRC        
+set(BGAL_Optimization_SRC
         ALGLIB/alglibinternal.cpp
         ALGLIB/alglibmisc.cpp
         ALGLIB/ap.cpp
@@ -27,3 +27,5 @@ set_target_properties(Optimization PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 target_include_directories(Optimization PUBLIC
 	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
 	$<INSTALL_INTERFACE:include>)
+
+target_link_libraries (Optimization Eigen3::Eigen)
