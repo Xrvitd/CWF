@@ -24,7 +24,7 @@ include_directories( ${LIBIGL_INCLUDE})
 # Get Eigen3
 find_package(Eigen3 REQUIRED)
 if (Eigen3_FOUND)
-    message(STATUS "${EIGEN3_VERSION_STRING}")
+    message(STATUS "${EIGEN3_VERSION_STRING} FOUND")
     # include_directories(${EIGEN3_INCLUDE_DIR})
 endif ()
 
@@ -38,7 +38,7 @@ endif ()
 # Get CGAL
 find_package(CGAL REQUIRED)
 if (CGAL_FOUND)
-   #  include(${CGAL_USE_FILE})
+    message(STATUS "CGAL FOUND")
 else ()
     message("ERROR: this program requires CGAL and will not be compiled.")
 endif ()
