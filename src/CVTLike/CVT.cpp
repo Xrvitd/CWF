@@ -327,14 +327,15 @@ namespace BGAL
 		input >> polyhedron;
 		Tree tree(faces(polyhedron).first, faces(polyhedron).second, polyhedron);
 
+
+
+		//if anisotropic
+		/*
 		Eigen::MatrixXd V;
 		Eigen::MatrixXi F;
 		igl::readOFF("Temp.off", V, F);
 		Eigen::VectorXd K;
 
-
-		//if anisotropic
-		/*
 		Eigen::MatrixXd HN;
 		Eigen::SparseMatrix<double> L, M, Minv;
 		igl::cotmatrix(V, F, L);
