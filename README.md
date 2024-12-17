@@ -7,6 +7,8 @@ Project Page: https://ruixu.me/html/CWF/index.html
 Paper link: https://arxiv.org/abs/2404.15661
 
 
+Note: If you have trouble configuring, please try our [original version](https://github.com/Xrvitd/CWF/tree/c2d6a7fe35bac171063eb77e66df9dc9eca8a2d8), as well as this version of [vcpkg](https://www.dropbox.com/scl/fi/x79za5w28sg4yzq53uh7e/vcpkg.zip?rlkey=re26jx3rfb6nw2gv776w6b0k9&dl=0). 
+
 Please cite our work:
 ```
 @article{xu2024cwf,
